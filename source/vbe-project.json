@@ -4,9 +4,9 @@
     "Description": "VBE Project"
   },
   "Items": {
-    "Name": "ACLibDeclarationDictCore",
+    "Name": "ACLibDeclarationDict",
     "Description": "",
-    "FileName": "ACLibDeclarationDictCore.accda",
+    "FileName": "ACLibDeclarationDict.accda",
     "HelpFile": "",
     "HelpContextId": 0,
     "ConditionalCompilationArguments": "",
