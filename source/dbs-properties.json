@@ -81,7 +81,7 @@
       "Type": 3
     },
     "Name": {
-      "Value": "rel:ACLibDeclarationDictCore.accda",
+      "Value": "rel:ACLibDeclarationDict.accda",
       "Type": 12
     },
     "NavPane Category": {
@@ -155,6 +155,10 @@
     "ShowDocumentTabs": {
       "Value": true,
       "Type": 1
+    },
+    "StartUpForm": {
+      "Value": "InstallAddInForm",
+      "Type": 10
     },
     "StartUpShowDBWindow": {
       "Value": true,

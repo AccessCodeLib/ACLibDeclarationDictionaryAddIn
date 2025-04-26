@@ -22,10 +22,12 @@ End Property
 
 Private Sub Form_Load()
 
-    Me.Caption = DeclDictAddInName & " " & ChrW(&H2022) & " Differences"
-    Me.lblVersionInfo.Caption = DeclDictAddInName & " " & ChrW(&H2022) & " Version " & DeclDictVersion
+   With CurrentApplication
+      Me.Caption = .ApplicationName & " " & ChrW(&H2022) & " Differences"
+      Me.lblVersionInfo.Caption = .ApplicationFullName & " " & ChrW(&H2022) & " Version " & CurrentApplication.Version
+   End With
 
-    SetApiDialogMode
+   SetApiDialogMode
 
 End Sub
 
