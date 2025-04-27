@@ -146,7 +146,7 @@ Public Sub ImportClassCodeModule_CheckKeysExists()
    Dim ActualDict As Scripting.Dictionary
    
    Dim ExpectedKeys() As Variant
-   ExpectedKeys = Array("CodeModulGenerator", "CodeModulGenerator_CreateCodemodule", "ComponentType", "Name", "CodeModulGenerator_InsertDeclarationLine", "Code", "CodeModulGenerator_RemoveCodemodule", _
+   ExpectedKeys = Array("ITestInterface", "ITestInterface_TestMe", "ITestInterface_TestProc", "TestParam1", _
                         "AccUnitX", "m_AccUnitInfo", "Field", "Const1", _
                         "TestEnum", "TestEnum_P1", _
                         "TestType1", "FldA", "FldB", "FldC", _

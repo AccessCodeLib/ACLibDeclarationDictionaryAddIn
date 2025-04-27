@@ -556,22 +556,30 @@ Public Function LoadFromFile(ByVal FullFileName As String, Optional ByRef ErrorM
 
 End Function
 
-Public Sub ExportToFile(ByVal FullFileName As String)
+Public Sub ExportToFile(ByVal FullFileName As String, Optional ByVal ExportAsSortedList As Boolean = True)
 
+   Dim WordArray() As Variant
    Dim i As Long
+
+   WordArray = m_Words.Keys
+
+   If ExportAsSortedList Then
+      QuickSort WordArray, LBound(WordArray), UBound(WordArray)
+   End If
 
    With New ADODB.Stream
       .Type = 2
       .Charset = "utf-8"
       .Open
-      For i = 0 To m_Words.Count - 1
-         .WriteText m_Words.Keys(i), adWriteLine
+      For i = LBound(WordArray) To UBound(WordArray)
+         .WriteText WordArray(i), adWriteLine
       Next
       .SaveToFile FullFileName, adSaveCreateOverWrite
       .Close
    End With
 
 End Sub
+
 
 #If DebugPrintEnabled Then
 

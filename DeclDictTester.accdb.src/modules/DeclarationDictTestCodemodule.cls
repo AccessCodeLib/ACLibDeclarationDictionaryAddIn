@@ -7,12 +7,17 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+'---------------------------------------------------------------------------------------
+' Class: DeclarationDictTestCodemodule
+'---------------------------------------------------------------------------------------
+'
+' Different examples for declarations
+'
+'---------------------------------------------------------------------------------------
 Option Compare Database
 Option Explicit
 
-'AccUnit:TestRelated
-
-'Implements CodeModulGenerator
+Implements ITestInterface
 
 Dim AccUnitX As Long
 Private m_AccUnitInfo As String
@@ -99,15 +104,13 @@ Private Static Sub MyStaticSub(Optional ByVal Reset As Boolean = False)
     Static Counter2 As Integer
 End Sub
 
+'---------------------------
+' Implement ITestInterface interface
+'
+Private Sub ITestInterface_TestMe()
+'
+End Sub
 
-Private Function CodeModulGenerator_CreateCodemodule(ByVal ComponentType As VBIDE.vbext_ComponentType, Optional ByVal Name As String = vbNullString) As VBIDE.VBComponent
+Private Function ITestInterface_TestProc(ByVal TestParam1 As Long) As Variant
 '
 End Function
-
-Private Sub CodeModulGenerator_InsertDeclarationLine(ByVal Code As String)
-'
-End Sub
-
-Private Sub CodeModulGenerator_RemoveCodemodule()
-'
-End Sub

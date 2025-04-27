@@ -29,7 +29,7 @@ Public Function Method1(ByVal X As Long) As Long
 
 End Function
 
-Public Function method2a() As Long
+Public Function Method2a() As Long
 
     Dim X As Long
 
@@ -41,7 +41,7 @@ Public Function method2a() As Long
         X = 10
     End If
 
-    method2a = X
+    Method2a = X
 
 Exit Function
 
