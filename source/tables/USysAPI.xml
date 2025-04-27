@@ -11,7 +11,7 @@
 &lt;blockquote&gt;
 
 &lt;div&gt;&lt;font size=2&gt;OpenDialogToFixLettercase - (Boolean) - Open dialog to fix lettercase&lt;/font&gt;&lt;/div&gt;
-&lt;div&gt;&lt;font size=2&gt;DeclDictFilePath - (String) - use alternative file path&lt;/font&gt;&lt;/div&gt;
+&lt;div&gt;&lt;font size=2&gt;DeclDictFilePath - (String) - use alternative dictionary file path&lt;/font&gt;&lt;/div&gt;
 
 &lt;/blockquote&gt;
 
@@ -23,6 +23,7 @@
  &lt;ul&gt;
   &lt;li&gt;&lt;font size=2&gt;Boolean (True) ... if DiffCount = 0&lt;/font&gt;&lt;/li&gt;
   &lt;li&gt;&lt;font size=2&gt;String ... if DiffCount &amp;gt; 0 =&amp;gt; &amp;quot;Failed: &amp;lt;lettercase info&amp;gt;&amp;quot;&lt;/font&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;font size=2&gt;String ... if dict file not exists =&amp;gt; &amp;quot;Info: No dictionary data found. A new dictionary has been created.&amp;quot;&lt;/font&gt;&lt;/li&gt;
  &lt;/ul&gt;
 &lt;/ul&gt;
 

@@ -14,11 +14,12 @@ Compare lettercase from CurrentVbProject with saved file dictionary items
  
 #### Parameters
 - OpenDialogToFixLettercase - (Boolean) - Open dialog to fix lettercase
-- DeclDictFilePath - (String) - use alternative file path
+- DeclDictFilePath - (String) - use alternative dictionary file path
 
 #### Returns
 - Boolean (True) ... if DiffCount = 0
 - String ... if DiffCount > 0 => "Failed: <lettercase info>"
+- String ... if dict file not exists => "Info: No dictionary data found. A new dictionary has been created."
  
 #### Example
 ```

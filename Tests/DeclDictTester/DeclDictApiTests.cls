@@ -28,7 +28,7 @@ Public Sub RunVcsCheck_WithoutDialogChangedLettercase_CheckReturnMessage()
    
    ' 1st call => run first export
    Result = Application.Run(AddInCallPath, False, DictFilePath)
-   Assert.That Result, Iz.EqualTo("Info: no export data exists, run first export")
+   Assert.That Result, Iz.EqualTo("Info: No dictionary data found. A new dictionary has been created.")
    
    ' 2nd call => no changes => Return value = True
    Result = Application.Run(AddInCallPath, False, DictFilePath)

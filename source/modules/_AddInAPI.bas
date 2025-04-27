@@ -39,6 +39,7 @@ End Function
 ' Returns:
 '      Boolean (True) ... if DiffCount = 0
 '      String         ... if DiffCount > 0 => "Failed: <lettercase info>"
+'      String         ... if dict file not exists => "Info: No dictionary data found. A new dictionary has been created."
 '
 '---------------------------------------------------------------------------------------
 Public Function RunVcsCheck(Optional ByVal OpenDialogToFixLettercase As Boolean = False, _
@@ -60,7 +61,7 @@ Public Function RunVcsCheck(Optional ByVal OpenDialogToFixLettercase As Boolean 
            .ImportVBProject CurrentVbProject
            ' ... log info: first export
            .ExportToFile DeclDictFilePath
-           RunVcsCheck = "Info: no export data exists, run first export"
+           RunVcsCheck = "Info: No dictionary data found. A new dictionary has been created."
            Exit Function
         End If
 
