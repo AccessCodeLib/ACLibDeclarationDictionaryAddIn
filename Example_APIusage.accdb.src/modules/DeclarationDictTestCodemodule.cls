@@ -1,4 +1,4 @@
-VERSION 1.0 CLASS
+﻿VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
 END
@@ -7,19 +7,12 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-'---------------------------------------------------------------------------------------
-' Class: DeclarationDictTestCodemodule
-'---------------------------------------------------------------------------------------
-'
-' Different examples for declarations
-'
-'---------------------------------------------------------------------------------------
 Option Compare Database
 Option Explicit
 
 'AccUnit:TestRelated
 
-Implements ITestInterface
+'Implements CodeModulGenerator
 
 Dim AccUnitX As Long
 Private m_AccUnitInfo As String
@@ -106,27 +99,15 @@ Private Static Sub MyStaticSub(Optional ByVal Reset As Boolean = False)
     Static Counter2 As Integer
 End Sub
 
-Private Sub TestPullrequest8_LineLabels()
 
-On Error GoTo ErrHandler
-
-
-ExitHere:
-   Exit Sub
-
-ErrHandler:
-
-
-
-End Sub
-
-'---------------------------
-' Implement ITestInterface interface
-'
-Private Sub ITestInterface_TestMe()
-'
-End Sub
-
-Private Function ITestInterface_TestProc(ByVal TestParam1 As Long) As Variant
+Private Function CodeModulGenerator_CreateCodemodule(ByVal ComponentType As VBIDE.vbext_ComponentType, Optional ByVal Name As String = vbNullString) As VBIDE.VBComponent
 '
 End Function
+
+Private Sub CodeModulGenerator_InsertDeclarationLine(ByVal Code As String)
+'
+End Sub
+
+Private Sub CodeModulGenerator_RemoveCodemodule()
+'
+End Sub

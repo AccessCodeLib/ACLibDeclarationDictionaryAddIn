@@ -1,0 +1,71 @@
+name: Build-accdb (on push, pull)
+
+on:
+  push:
+    branches:
+      - main
+      - feature/**
+      - bugfix/**
+    paths:
+      - 'source/**'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  build:
+    runs-on: [self-hosted, Windows, Office]
+
+    steps:
+    - name: "Checkout code for release tag"
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.release.tag_name }}
+
+    - name: "Build add-in"
+      id: build_add_in
+      uses: AccessCodeLib/msaccess-vcs-build@main
+      with:
+        source-dir: "source"
+        target-dir: "bin"
+        file-name: "ACLibDeclarationDictCore.accda"
+        run-accunit-tests: true
+      timeout-minutes: 10
+      
+    - name: "Build DeclDictTester"
+      id: build_delc_dict_tester
+      uses: AccessCodeLib/msaccess-vcs-build@main
+      with:
+        source-dir: "DeclDictTester.accdb.src"
+        target-dir: "bin"
+        file-name: "DeclDictTester.accdb"
+        run-accunit-tests: true
+      timeout-minutes: 10
+      
+    - name: "Build Example_APIusage"
+      id: build_example_api_usage
+      uses: AccessCodeLib/msaccess-vcs-build@main
+      with:
+        source-dir: "Example_APIusage.accdb.src"
+        target-dir: "bin"
+        file-name: "Example_APIusage.accdb"
+      timeout-minutes: 10
+
+    - name: "Upload Build Artifact"
+      uses: actions/upload-artifact@v4
+      id: "upload"
+      with:
+        name: "Install files"
+        path: "./bin/*"
+        if-no-files-found: warn
+    - name: "Attestation"
+      uses: actions/attest-build-provenance@v2
+      with:
+        subject-name: "Install files"
+        subject-digest: sha256:${{ steps.upload.outputs.artifact-digest }}

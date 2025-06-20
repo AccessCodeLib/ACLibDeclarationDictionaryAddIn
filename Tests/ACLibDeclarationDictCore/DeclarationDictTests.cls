@@ -63,6 +63,24 @@ Public Sub ImportCode_InsertCodeLine_CheckKeys(ByVal Code As String, ByVal Expec
    
 End Sub
 
+'AccUnit:Row("Dim Abc(1) As String", "Abc")
+'AccUnit:Row("Dim Abc(1 To 2) As String", "Abc")
+'AccUnit: Row("Dim Abc(1, 2) As String", "Abc")
+'AccUnit: Row("Dim Abc(1, 2, 3) As String", "Abc")
+'AccUnit:Row("ReDim Abc(x, y) As String", "Abc")
+'AccUnit:Row("ReDim Abc(x, y, z) As String", "Abc")
+Public Sub ImportCode_Issue4_MultiDimArrayDeclaration(ByVal Code As String, ByVal Expected As String)
+  
+   Dim Actual As String
+   
+   m_DeclDict.ImportCode Code
+   Actual = Join(m_DeclDict.WordsDict.Keys, "|")
+   
+   Assert.That Actual, Iz.EqualTo(Expected)
+   
+End Sub
+
+
 'AccUnit:Row("Private Function Func1() As String" & Environment.NewLine & Environment.NewLine & "   Dim X as String, Y As Long", "Func1|X|Y")
 'AccUnit:Row(Environment.NewLine & "    Private abc " & Environment.NewLine & "   Public X as String, Y As Long", "abc|X|Y")
 'AccUnit:Row("Private Function Func1() As String ' _" & Environment.NewLine & "   Dim X as String, Y As Long", "Func1")
@@ -71,6 +89,31 @@ Public Sub ImportCode_InsertCodeLines_CheckKeys(ByVal Code As String, ByVal Expe
 
    Dim Actual As String
       
+   m_DeclDict.ImportCode Code
+   Actual = Join(m_DeclDict.WordsDict.Keys, "|")
+   
+   Assert.That Actual, Iz.EqualTo(Expected)
+   
+End Sub
+
+'AccUnit:Row("Dim SomeFuncVar As Integer ' the next line should not be ignored" & Environment.NewLine & "Dim AnotherFuncVar As String", "SomeFuncVar|AnotherFuncVar")
+Public Sub ImportCode_Issue3_RemovingCommentCorruptsLineEndings(ByVal Code As String, ByVal Expected As String)
+
+   Dim Actual As String
+      
+   m_DeclDict.ImportCode Code
+   Actual = Join(m_DeclDict.WordsDict.Keys, "|")
+   
+   Assert.That Actual, Iz.EqualTo(Expected)
+   
+End Sub
+
+'AccUnit:Row(Environment.NewLine & "ExitHere:" & Environment.NewLine & "Dim Abc As String", "ExitHere|Abc")
+'AccUnit:Row(Environment.NewLine & "ExitHere:  Dim Abc As String", "ExitHere|Abc")
+Public Sub ImportCode_Pullrequest8_LineLabel(ByVal Code As String, ByVal Expected As String)
+  
+   Dim Actual As String
+   
    m_DeclDict.ImportCode Code
    Actual = Join(m_DeclDict.WordsDict.Keys, "|")
    
@@ -164,7 +207,8 @@ Public Sub ImportClassCodeModule_CheckKeysExists()
                         "PropertySet", "ObjRef", _
                         "TestMe", _
                         "VariableParams", "Args", _
-                        "MyStaticSub", "Reset", "Counter2")
+                        "MyStaticSub", "Reset", "Counter2", _
+                        "TestPullrequest8_LineLabels", "ExitHere", "ErrHandler")
     
    
    m_DeclDict.ImportVBComponent CurrentVbProject.VBComponents("DeclarationDictTestCodemodule")

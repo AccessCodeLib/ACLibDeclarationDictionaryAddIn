@@ -162,7 +162,9 @@ Public Sub ImportVBComponent(ByVal VBComponent2Import As VBComponent)
 End Sub
 
 Public Sub ImportCodeModule(ByVal CodeModule2Import As CodeModule)
-   ImportCode CodeModule2Import.Lines(1, CodeModule2Import.CountOfLines)
+   If CodeModule2Import.CountOfLines > 0 Then
+      ImportCode CodeModule2Import.Lines(1, CodeModule2Import.CountOfLines)
+   End If
 End Sub
 
 Public Sub ImportCode(ByVal Code As String)
@@ -217,12 +219,16 @@ Private Function PrepareCode(ByVal Code As String, ByVal RegEx As RegExp) As Str
 
       ' remove comments
       '.Pattern = "'(.*)[\r\n]"
-      .Pattern = "'(.*)(?:[\r\n]|$)"
-      Code = .Replace(Code, "")
+      .Pattern = "'(.*)([\r\n]|$)"
+      Code = .Replace(Code, "$2")
 
 #If DebugPrintEnabled Then
    DebugPrint Code, True, "PrepareCode- after remove comments"
 #End If
+
+      ' treat line labels as dim (but not line numbers)
+      .Pattern = "([\r\n]|^)([^0-9\r\n]\S*):(\s|[\r\n]|$)"
+      Code = .Replace(Code, "$1Dim $2:$3")
 
       ' dim a as String: a = 5  => insert line break
       .Pattern = "(\:\s)"
@@ -304,6 +310,15 @@ Private Sub AddWordFromDeclaration(ByRef Declarations As String, ByVal IsProcedu
    Do While InStr(1, Declarations, "  ") > 0
       Declarations = Replace(Declarations, "  ", " ")
    Loop
+
+   If Not IsProcedure And Not IsEnumTypeBlock Then
+      Do While Declarations Like "*(*,*)*"
+         ' prevent multi-dimensional Dim from transforming into new declarations (might be numeric)
+         Pos = InStr(1, Declarations, "(")
+         PosX = InStr(Pos, Declarations, ")")
+         Declarations = Left(Declarations, Pos - 1) & " " & Mid(Declarations, PosX + 1)
+      Loop
+   End If
 
    DeclArray = Split(Trim(Declarations), ",")
 
