@@ -28,13 +28,13 @@ jobs:
       with:
         ref: ${{ github.event.release.tag_name }}
 
-    - name: "Build add-in"
+    - name: "Build Add-in"
       id: build_add_in
       uses: AccessCodeLib/msaccess-vcs-build@main
       with:
         source-dir: "source"
         target-dir: "bin"
-        file-name: "ACLibDeclarationDictCore.accda"
+        file-name: "ACLibDeclarationDict.accda"
         run-accunit-tests: true
       timeout-minutes: 10
       
