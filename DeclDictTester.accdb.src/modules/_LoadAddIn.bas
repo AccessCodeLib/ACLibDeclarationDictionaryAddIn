@@ -14,7 +14,7 @@ Public Sub LoadAddIn_RunVcsCheck()
 'API: RunVcsCheck(Optional ByVal OpenDialogToFixLettercase As Boolean = False)
 
    Dim AddInCallPath As String
-   AddInCallPath = CurrentProject.Path & "\ACLibDeclarationDictCore.RunVcsCheck"
+   AddInCallPath = CurrentProject.Path & "\ACLibDeclarationDict.RunVcsCheck"
 
    Dim Result As Variant
    Result = Application.Run(AddInCallPath, True)
