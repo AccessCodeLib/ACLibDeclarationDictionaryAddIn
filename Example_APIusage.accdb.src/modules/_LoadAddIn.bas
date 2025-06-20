@@ -9,7 +9,7 @@ Public Sub LoadAddIn()
 '                                 Optional ByVal IncludeUsedMembers As Boolean = False) As Variant
 
    Dim AddInCallPath As String
-   AddInCallPath = CurrentProject.Path & "\ACLibDeclarationDictCore.RunVcsCheck"
+   AddInCallPath = CurrentProject.Path & "\ACLibDeclarationDict.RunVcsCheck"
 
    Dim Result As Variant
    Result = Application.Run(AddInCallPath, True, vbNullString, True)
