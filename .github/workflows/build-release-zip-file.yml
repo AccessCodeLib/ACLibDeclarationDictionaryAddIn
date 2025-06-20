@@ -25,7 +25,7 @@ jobs:
       with:
         source-dir: "source"
         target-dir: "bin"
-        file-name: "ACLibDeclarationDictCore.accda"
+        file-name: "ACLibDeclarationDict.accda"
         run-accunit-tests: true
       timeout-minutes: 10
       
@@ -38,20 +38,11 @@ jobs:
         file-name: "DeclDictTester.accdb"
         run-accunit-tests: true
       timeout-minutes: 10
-      
-    - name: "Build Example_APIusage"
-      id: build_example_api_usage
-      uses: AccessCodeLib/msaccess-vcs-build@main
-      with:
-        source-dir: "Example_APIusage.accdb.src"
-        target-dir: "bin"
-        file-name: "Example_APIusage.accdb"
-      timeout-minutes: 10
 
     - name: "Create versioned ZIP file"
       run: |
         $zipName = "ACLibImportWizard_${{ github.event.release.tag_name }}.zip"
-        Compress-Archive -Path .\bin\*.accda, .\bin\Example_APIusage.accdb -DestinationPath $zipName
+        Compress-Archive -Path .\bin\*.accda -DestinationPath $zipName
         echo "ZIP_NAME=$zipName" | Out-File -FilePath $env:GITHUB_ENV -Append
 
     - name: "Upload ZIP to GitHub Release"
