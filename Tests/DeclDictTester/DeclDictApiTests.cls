@@ -7,7 +7,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-Option Compare Database
+Option Compare Text
 Option Explicit
 
 'AccUnit:TestClass
@@ -18,7 +18,7 @@ Public Sub RunVcsCheck_WithoutDialogChangedLettercase_CheckReturnMessage()
    Dim DictFilePath As String
    Dim Result As Variant
    
-   AddInCallPath = CurrentProject.Path & "\ACLibDeclarationDictCore.RunVcsCheck"
+   AddInCallPath = CurrentProject.Path & "\ACLibDeclarationDict.RunVcsCheck"
    DictFilePath = CurrentProject.Path & "\DeclDictApiTests_DeclDict.txt"
    
    ' ensure run first export => delete file if exists
