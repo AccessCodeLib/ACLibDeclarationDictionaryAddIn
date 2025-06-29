@@ -103,12 +103,18 @@ Private Sub cmdChangeLetterCase_Click()
 End Sub
 
 Private Sub cmdUpdateDict_Click()
-   ActiveDeclarationDict.ImportVBProject CurrentVbProject
+
+   With New CodemoduleDeclarationReader
+      .ImportVBProject CurrentVbProject, ActiveDeclarationDict, True
+   End With
+
    If Not (m_InsertRecordset Is Nothing) Then
       m_InsertRecordset.Close
       Set m_InsertRecordset = Nothing
    End If
+
    RequeryDictData
+
 End Sub
 
 Private Sub lbDictData_AfterUpdate()
