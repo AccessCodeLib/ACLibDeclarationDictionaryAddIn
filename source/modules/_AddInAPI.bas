@@ -19,11 +19,11 @@ End Function
 ' Function: RunVcsCheckDialog
 '---------------------------------------------------------------------------------------
 '
-'  Equal to RunVcsCheck(True)
+'  Equal to RunVcsCheck(True, vbNullString, True)
 '
 '---------------------------------------------------------------------------------------
 Public Function RunVcsCheckDialog() As Variant
-   RunVcsCheckDialog = RunVcsCheck(True)
+   RunVcsCheckDialog = RunVcsCheck(True, , True)
 End Function
 
 
@@ -43,7 +43,8 @@ End Function
 '
 '---------------------------------------------------------------------------------------
 Public Function RunVcsCheck(Optional ByVal OpenDialogToFixLettercase As Boolean = False, _
-                            Optional ByVal DeclDictFilePath As String = vbNullString) As Variant
+                            Optional ByVal DeclDictFilePath As String = vbNullString, _
+                            Optional ByVal IncludeUsedMembers As Boolean = False) As Variant
 
     Dim CheckMsg As String
     Dim DiffCnt As Long
@@ -59,7 +60,7 @@ Public Function RunVcsCheck(Optional ByVal OpenDialogToFixLettercase As Boolean 
     End If
 
     If Not DeclDict.LoadFromFile(DeclDictFilePath) Then
-       ImportVBProject CurrentVbProject, DeclDict
+       ImportVBProject CurrentVbProject, DeclDict, IncludeUsedMembers
        ' ... log info: first export
        DeclDict.ExportToFile DeclDictFilePath
        RunVcsCheck = "Info: No dictionary data found. A new dictionary has been created."
@@ -67,7 +68,7 @@ Public Function RunVcsCheck(Optional ByVal OpenDialogToFixLettercase As Boolean 
     End If
 
     IntialCnt = DeclDict.Count
-    ImportVBProject CurrentVbProject, DeclDict
+    ImportVBProject CurrentVbProject, DeclDict, IncludeUsedMembers
 
     DiffCnt = DeclDict.DiffCount
     If DiffCnt = 0 Then
@@ -100,10 +101,11 @@ Public Function RunVcsCheck(Optional ByVal OpenDialogToFixLettercase As Boolean 
 
 End Function
 
-Private Sub ImportVBProject(ByVal VbProjectToImport As VBIDE.VBProject, ByVal DeclDict As DeclarationDict)
+Private Sub ImportVBProject(ByVal VbProjectToImport As VBIDE.VBProject, ByVal DeclDict As DeclarationDict, _
+                   Optional ByVal IncludeUsedMembers As Boolean = False)
 
    With New CodemoduleDeclarationReader
-      .ImportVBProject VbProjectToImport, DeclDict
+      .ImportVBProject VbProjectToImport, DeclDict, IncludeUsedMembers
    End With
 
 End Sub

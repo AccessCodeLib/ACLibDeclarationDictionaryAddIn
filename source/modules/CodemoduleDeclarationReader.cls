@@ -12,27 +12,27 @@ Option Explicit
 
 Private m_DeclDict As DeclarationDict
 
-Public Sub ImportVBProject(ByVal VBProject2Import As VBProject, ByVal DeclDict As DeclarationDict)
+Public Sub ImportVBProject(ByVal VBProject2Import As VBProject, ByVal DeclDict As DeclarationDict, Optional ByVal IncludeUsedMembers As Boolean = False)
 
    Dim vbc As VBComponent
 
    For Each vbc In VBProject2Import.VBComponents
-      ImportVBComponent vbc, DeclDict
+      ImportVBComponent vbc, DeclDict, IncludeUsedMembers
    Next
 
 End Sub
 
-Public Sub ImportVBComponent(ByVal VBComponent2Import As VBComponent, ByVal DeclDict As DeclarationDict)
-   ImportCodeModule VBComponent2Import.CodeModule, DeclDict
+Public Sub ImportVBComponent(ByVal VBComponent2Import As VBComponent, ByVal DeclDict As DeclarationDict, Optional ByVal IncludeUsedMembers As Boolean = False)
+   ImportCodeModule VBComponent2Import.CodeModule, DeclDict, IncludeUsedMembers
 End Sub
 
-Public Sub ImportCodeModule(ByVal CodeModule2Import As CodeModule, ByVal DeclDict As DeclarationDict)
+Public Sub ImportCodeModule(ByVal CodeModule2Import As CodeModule, ByVal DeclDict As DeclarationDict, Optional ByVal IncludeUsedMembers As Boolean = False)
    If CodeModule2Import.CountOfLines > 0 Then
-      ImportCode CodeModule2Import.Lines(1, CodeModule2Import.CountOfLines), DeclDict
+      ImportCode CodeModule2Import.Lines(1, CodeModule2Import.CountOfLines), DeclDict, IncludeUsedMembers
    End If
 End Sub
 
-Public Sub ImportCode(ByVal Code As String, ByVal DeclDict As DeclarationDict)
+Public Sub ImportCode(ByVal Code As String, ByVal DeclDict As DeclarationDict, Optional ByVal IncludeUsedMembers As Boolean = False)
 
    Dim RegEx As RegExp
    Set RegEx = NewRegExp
@@ -43,17 +43,23 @@ Public Sub ImportCode(ByVal Code As String, ByVal DeclDict As DeclarationDict)
 
    Const ProcIndex As Long = 0
    Const EnumTypeIndex As Long = 1
+   Const DimIndex As Long = 2
 
-   Dim Patterns(2) As String
+   Dim Patterns() As String
+   ReDim Patterns(2 + Abs(IncludeUsedMembers)) As String
 
    Patterns(ProcIndex) = "(?:\r|\n|^)\s*(?:Sub|Function|Property Get|Property Let|Property Set|Event)\s+([^\r\n]*)"
    Patterns(EnumTypeIndex) = "(?:\r|\n|^)\s*(?:Enum|Type)([\s\S]*?)(?:End\s+(?:Enum|Type))"
    Patterns(2) = "(?:\r|\n|^)\s*(?:Dim|ReDim|Private|Friend|Public|Const|Static|Global|Implements)\s+([^\r\n]*)"
+   If IncludeUsedMembers Then
+      'see: https://github.com/hrschupp/ACLibDeclarationDictionaryCore/commit/861031d695c236f3b7872f191e2d3a1570d35fca#diff-0a954b2b22b447d5669ac2cc27824aef945ba74307ebf8c3c3c2c5dc67080afa
+      Patterns(3) = "(?:[.!])([^0-9\s.!_\(\)\[\]\r\n][^\s.!\(\)\[\]\r\n]*)(?:\s|[.!\(\)\[\]\r\n]|$)"
+   End If
 
    Dim i As Long
    For i = 0 To UBound(Patterns)
       RegEx.Pattern = Patterns(i)
-      AddFromCode Code, RegEx, i = ProcIndex, i = EnumTypeIndex
+      AddFromCode Code, RegEx, i = ProcIndex, i = EnumTypeIndex, i = DimIndex
    Next
 
 End Sub
@@ -130,20 +136,20 @@ Private Function PrepareCode(ByVal Code As String, ByVal RegEx As RegExp) As Str
 
 End Function
 
-Private Sub AddFromCode(ByVal Code As String, ByVal RegEx As RegExp, ByVal IsProcedure As Boolean, ByVal IsEnumTypeBlock As Boolean)
+Private Sub AddFromCode(ByVal Code As String, ByVal RegEx As RegExp, ByVal IsProcedure As Boolean, ByVal IsEnumTypeBlock As Boolean, ByVal IsDimBlock As Boolean)
 
    Dim Match As Match
    Dim i As Long
 
    For Each Match In RegEx.Execute(Code)
       For i = 0 To Match.SubMatches.Count - 1
-         AddWordFromDeclaration Match.SubMatches(i), IsProcedure, IsEnumTypeBlock
+         AddWordFromDeclaration Match.SubMatches(i), IsProcedure, IsEnumTypeBlock, IsDimBlock
       Next
    Next
 
 End Sub
 
-Private Sub AddWordFromDeclaration(ByRef Declarations As String, ByVal IsProcedure As Boolean, ByVal IsEnumTypeBlock As Boolean)
+Private Sub AddWordFromDeclaration(ByRef Declarations As String, ByVal IsProcedure As Boolean, ByVal IsEnumTypeBlock As Boolean, ByVal IsDimBlock As Boolean)
 
    Dim Word As String
    Dim i As Long
@@ -178,7 +184,7 @@ Private Sub AddWordFromDeclaration(ByRef Declarations As String, ByVal IsProcedu
       Declarations = Replace(Declarations, "  ", " ")
    Loop
 
-   If Not (IsProcedure Or IsEnumTypeBlock) Then
+   If IsDimBlock Then
       Do While Declarations Like "*(*,*)*"
          ' prevent multi-dimensional Dim from transforming into new declarations (might be numeric)
          Pos = InStr(1, Declarations, "(")
