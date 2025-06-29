@@ -25,3 +25,6 @@ vcs-index.json
 # others
 *.dll
 *.zip
+
+# don't commit dict files in this repository
+*.accd[ab].DeclarationDict.txt
