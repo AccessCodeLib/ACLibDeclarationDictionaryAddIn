@@ -26,12 +26,12 @@ Option Private Module
 #If USELOCALIZATION_DE = 1 Then
 Private Const SELECTBOX_FILE_DIALOG_TITLE As String = "Datei auswählen"
 Private Const SELECTBOX_FOLDER_DIALOG_TITLE As String = "Ordner auswählen"
-Private Const SELECTBOX_OPENTITLE As String = "auswählen"
+Private Const SELECTBOX_OPENTITLE As String = "Auswählen"
 Private Const FILTERSTRING_ALL_FILES As String = "Alle Dateien (*.*)"
 #Else
 Private Const SELECTBOX_FILE_DIALOG_TITLE As String = "Select file"
 Private Const SELECTBOX_FOLDER_DIALOG_TITLE As String = "Select folder"
-Private Const SELECTBOX_OPENTITLE As String = "auswählen"
+Private Const SELECTBOX_OPENTITLE As String = "Select"
 Private Const FILTERSTRING_ALL_FILES As String = "All Files (*.*)"
 #End If
 
@@ -42,8 +42,6 @@ Private Const SE_ERR_NOTFOUND As Long = 2
 Private Const SE_ERR_NOASSOC  As Long = 31
 
 Private Const VbaErrNo_FileNotFound As Long = 53
-
-#If VBA7 Then
 
 Private Declare PtrSafe Function WNetGetConnection Lib "mpr.dll" Alias "WNetGetConnectionA" ( _
          ByVal lpszLocalName As String, ByVal lpszRemoteName As String, cbRemoteName As Long) As Long
@@ -66,30 +64,6 @@ Private Declare PtrSafe Function API_ShellExecuteA Lib "shell32.dll" Alias "Shel
          ByVal lpDirectory As String, _
          ByVal nShowCmd As Long) As Long
 
-#Else
-
-Private Declare Function WNetGetConnection Lib "mpr.dll" Alias "WNetGetConnectionA" ( _
-         ByVal lpszLocalName As String, ByVal lpszRemoteName As String, cbRemoteName As Long) As Long
-
-Private Declare Function API_GetTempPath Lib "kernel32" Alias "GetTempPathA" ( _
-         ByVal nBufferLength As Long, _
-         ByVal lpBuffer As String) As Long
-
-Private Declare Function API_GetTempFilename Lib "kernel32" Alias "GetTempFileNameA" ( _
-         ByVal lpszPath As String, _
-         ByVal lpPrefixString As String, _
-         ByVal wUnique As Long, _
-         ByVal lpTempFileName As String) As Long
-
-Private Declare Function API_ShellExecuteA Lib "shell32.dll" Alias "ShellExecuteA" ( _
-         ByVal Hwnd As Long, _
-         ByVal lOperation As String, _
-         ByVal lpFile As String, _
-         ByVal lpParameters As String, _
-         ByVal lpDirectory As String, _
-         ByVal nShowCmd As Long) As Long
-
-#End If
 
 '---------------------------------------------------------------------------------------
 ' Function: SelectFile
