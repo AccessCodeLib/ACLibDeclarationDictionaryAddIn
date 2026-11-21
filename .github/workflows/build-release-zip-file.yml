@@ -42,7 +42,7 @@ jobs:
 
     - name: "Create versioned ZIP file"
       run: |
-        $zipName = "ACLibImportWizard_${{ github.event.release.tag_name }}.zip"
+        $zipName = "ACLibDeclarationDict_${{ github.event.release.tag_name }}.zip"
         Compress-Archive -Path .\bin\*.accda -DestinationPath $zipName
         echo "ZIP_NAME=$zipName" | Out-File -FilePath $env:GITHUB_ENV -Append
 
