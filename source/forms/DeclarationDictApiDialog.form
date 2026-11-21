@@ -13,13 +13,13 @@ Begin Form
     DatasheetGridlinesBehavior =3
     Cycle =1
     GridY =10
-    Width =10148
+    Width =10140
     DatasheetFontHeight =11
     ItemSuffix =88
-    Left =5811
-    Top =3026
-    Right =24429
-    Bottom =14117
+    Left =1000
+    Top =1000
+    Right =50000
+    Bottom =50000
     RecSrcDt = Begin
         0x1b36415d9252e640
     End
@@ -142,7 +142,7 @@ Begin Form
             GridlineShade =65.0
         End
         Begin Section
-            Height =4649
+            Height =4620
             Name ="Detail"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -168,19 +168,15 @@ Begin Form
                     AllowValueListEdits =0
                     InheritValueList =0
 
-                    LayoutCachedLeft =60
-                    LayoutCachedTop =57
-                    LayoutCachedWidth =5476
-                    LayoutCachedHeight =4593
                 End
                 Begin ListBox
                     RowSourceTypeInt =1
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =5674
-                    Top =1397
+                    Left =5640
+                    Top =1380
                     Width =4380
-                    Height =1354
+                    Height =1320
                     TabIndex =3
                     ForeColor =0
                     Name ="lbVariations"
@@ -196,10 +192,6 @@ Begin Form
                     AllowValueListEdits =0
                     InheritValueList =0
 
-                    LayoutCachedLeft =5674
-                    LayoutCachedTop =1397
-                    LayoutCachedWidth =10054
-                    LayoutCachedHeight =2751
                     RowStart =4
                     RowEnd =4
                     ColumnEnd =1
@@ -214,36 +206,20 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =1
                     IMESentenceMode =3
-                    Left =5674
+                    Left =5640
                     Top =60
                     Width =4380
-                    Height =317
+                    Height =300
                     FontWeight =700
                     TabIndex =1
                     Name ="txtWord"
                     ControlSource ="=[lbDictData]"
                     Format ="@;;\"(select item)\""
-                    ConditionalFormat = Begin
-                        0x0100000086000000010000000100000000000000000000001200000001000000 ,
-                        0xbfbfbf00ffffff00000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b0074007800740057006f00720064005d0020004900730020004e0075006c00 ,
-                        0x6c0000000000
-                    End
                     GroupTable =1
                     HorizontalAnchor =1
 
-                    LayoutCachedLeft =5674
-                    LayoutCachedTop =60
-                    LayoutCachedWidth =10054
-                    LayoutCachedHeight =377
                     ColumnEnd =1
                     LayoutGroup =1
-                    ConditionalFormat14 = Begin
-                        0x010001000000010000000000000001000000bfbfbf00ffffff00110000005b00 ,
-                        0x74007800740057006f00720064005d0020004900730020004e0075006c006c00 ,
-                        0x000000000000000000000000000000000000000000
-                    End
                     GroupTable =1
                 End
                 Begin CommandButton
@@ -271,22 +247,13 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =1
                     IMESentenceMode =3
-                    Left =5674
-                    Top =737
+                    Left =5640
+                    Top =720
                     Width =4380
                     Height =300
                     TabIndex =2
                     Name ="txtCurrentLetterCase"
                     Format ="@;;---"
-                    ConditionalFormat = Begin
-                        0x01000000dc000000020000000100000000000000000000001200000001000000 ,
-                        0xbfbfbf00ffffff000100000000000000130000003d00000001010000ba141900 ,
-                        0xffffff0000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b0074007800740057006f00720064005d0020004900730020004e0075006c00 ,
-                        0x6c000000000053007400720043006f006d00700028005b007400780074005700 ,
-                        0x6f00720064005d002c005b00740078007400430075007200720065006e007400 ,
-                        0x560061006c00750065005d002c00300029003c003e00300000000000
-                    End
                     GroupTable =1
                     TopPadding =0
                     GridlineWidthLeft =0
@@ -295,30 +262,17 @@ Begin Form
                     GridlineWidthBottom =0
                     HorizontalAnchor =1
 
-                    LayoutCachedLeft =5674
-                    LayoutCachedTop =737
-                    LayoutCachedWidth =10054
-                    LayoutCachedHeight =1037
                     RowStart =2
                     RowEnd =2
                     ColumnEnd =1
                     LayoutGroup =1
-                    ConditionalFormat14 = Begin
-                        0x010002000000010000000000000001000000bfbfbf00ffffff00110000005b00 ,
-                        0x74007800740057006f00720064005d0020004900730020004e0075006c006c00 ,
-                        0x0000000000000000000000000000000000000000000100000000000000010100 ,
-                        0x00ba141900ffffff002900000053007400720043006f006d00700028005b0074 ,
-                        0x007800740057006f00720064005d002c005b0074007800740043007500720072 ,
-                        0x0065006e007400560061006c00750065005d002c00300029003c003e00300000 ,
-                        0x0000000000000000000000000000000000000000
-                    End
                     GroupTable =1
                 End
                 Begin Label
                     OverlapFlags =85
                     TextAlign =1
-                    Left =5674
-                    Top =437
+                    Left =5640
+                    Top =420
                     Width =4380
                     Height =300
                     Name ="Label19"
@@ -326,10 +280,6 @@ Begin Form
                     GroupTable =1
                     BottomPadding =0
                     HorizontalAnchor =1
-                    LayoutCachedLeft =5674
-                    LayoutCachedTop =437
-                    LayoutCachedWidth =10054
-                    LayoutCachedHeight =737
                     RowStart =1
                     RowEnd =1
                     ColumnEnd =1
@@ -339,8 +289,8 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     TextAlign =1
-                    Left =5674
-                    Top =1097
+                    Left =5640
+                    Top =1080
                     Width =4380
                     Height =300
                     Name ="Label20"
@@ -348,10 +298,6 @@ Begin Form
                     GroupTable =1
                     BottomPadding =0
                     HorizontalAnchor =1
-                    LayoutCachedLeft =5674
-                    LayoutCachedTop =1097
-                    LayoutCachedWidth =10054
-                    LayoutCachedHeight =1397
                     RowStart =3
                     RowEnd =3
                     ColumnEnd =1
@@ -365,44 +311,28 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =1
                     IMESentenceMode =3
-                    Left =5674
-                    Top =3111
-                    Width =3403
-                    Height =343
+                    Left =5640
+                    Top =3120
+                    Width =3420
+                    Height =360
                     TabIndex =4
                     Name ="txtSelectedLetterCase"
                     ControlSource ="=[lbVariations]"
                     Format ="@;;---"
-                    ConditionalFormat = Begin
-                        0x0100000086000000010000000100000000000000000000001200000001000000 ,
-                        0xbfbfbf00ffffff00000000000000000000000000000000000000000000000000 ,
-                        0x0000000000000000000000000000000000000000000000000000000000000000 ,
-                        0x5b0074007800740057006f00720064005d0020004900730020004e0075006c00 ,
-                        0x6c0000000000
-                    End
                     GroupTable =1
                     TopPadding =0
                     HorizontalAnchor =1
 
-                    LayoutCachedLeft =5674
-                    LayoutCachedTop =3111
-                    LayoutCachedWidth =9077
-                    LayoutCachedHeight =3454
                     RowStart =6
                     RowEnd =6
                     LayoutGroup =1
-                    ConditionalFormat14 = Begin
-                        0x010001000000010000000000000001000000bfbfbf00ffffff00110000005b00 ,
-                        0x74007800740057006f00720064005d0020004900730020004e0075006c006c00 ,
-                        0x000000000000000000000000000000000000000000
-                    End
                     GroupTable =1
                 End
                 Begin Label
                     OverlapFlags =85
                     TextAlign =1
-                    Left =5674
-                    Top =2777
+                    Left =5640
+                    Top =2760
                     Width =4380
                     Height =300
                     Name ="Label45"
@@ -410,10 +340,6 @@ Begin Form
                     GroupTable =1
                     TopPadding =0
                     HorizontalAnchor =1
-                    LayoutCachedLeft =5674
-                    LayoutCachedTop =2777
-                    LayoutCachedWidth =10054
-                    LayoutCachedHeight =3077
                     RowStart =5
                     RowEnd =5
                     ColumnEnd =1
@@ -423,10 +349,10 @@ Begin Form
                 Begin CommandButton
                     Enabled = NotDefault
                     OverlapFlags =85
-                    Left =9137
-                    Top =3111
-                    Width =917
-                    Height =343
+                    Left =9120
+                    Top =3120
+                    Width =900
+                    Height =360
                     TabIndex =5
                     Name ="cmdChangeLetterCase"
                     Caption ="Commit"
@@ -435,10 +361,6 @@ Begin Form
                     TopPadding =0
                     HorizontalAnchor =1
 
-                    LayoutCachedLeft =9137
-                    LayoutCachedTop =3111
-                    LayoutCachedWidth =10054
-                    LayoutCachedHeight =3454
                     RowStart =6
                     RowEnd =6
                     ColumnStart =1
@@ -464,10 +386,6 @@ Begin Form
                     FontSize =8
                     Name ="lblVersionInfo"
                     HorizontalAnchor =2
-                    LayoutCachedLeft =5555
-                    LayoutCachedTop =4370
-                    LayoutCachedWidth =10105
-                    LayoutCachedHeight =4593
                 End
             End
         End

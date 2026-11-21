@@ -6,10 +6,22 @@
   "Items": {
     "Databases": {
       "SummaryInfo": {
-        "Author": "Josef Pötzl",
-        "Comments": "* List of declarations\r\n* Save to / load from table or file\r\n* Compare and repair letter case",
-        "Company": "access-codelib.net",
-        "Title": "ACLib Declaration Dictionary"
+        "Author": {
+          "Type": 10,
+          "Value": "Josef Pötzl"
+        },
+        "Comments": {
+          "Type": 10,
+          "Value": "* List of declarations\r\n* Save to / load from table or file\r\n* Compare and repair letter case"
+        },
+        "Company": {
+          "Type": 10,
+          "Value": "access-codelib.net"
+        },
+        "Title": {
+          "Type": 10,
+          "Value": "ACLib Declaration Dictionary"
+        }
       }
     }
   }
