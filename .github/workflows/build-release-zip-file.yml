@@ -50,7 +50,7 @@ jobs:
 
     - name: "Create versioned ZIP file"
       run: |
-        $zipName = "ACLibImportWizard_${{ github.event.release.tag_name }}.zip"
+        $zipName = "ACLibDeclarationDictionaryCore_${{ github.event.release.tag_name }}.zip"
         Compress-Archive -Path .\bin\*.accda, .\bin\Example_APIusage.accdb -DestinationPath $zipName
         echo "ZIP_NAME=$zipName" | Out-File -FilePath $env:GITHUB_ENV -Append
 
@@ -88,7 +88,7 @@ jobs:
         $ErrorActionPreference = "Stop"
 
         # get current release notes
-        $oldBody = gh release view $env:TAG --repo $env:REPO --json body --template "{{.body}}"
+        $oldBody = (gh release view $env:TAG --repo $env:REPO --json body --template "{{.body}}") -join "`n"
 
         # build Attestation URL
         $attestationId = "${{ steps.attestation.outputs.attestation-id }}"
