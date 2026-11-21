@@ -26,6 +26,7 @@ jobs:
         source-dir: "source"
         target-dir: "bin"
         file-name: "ACLibDeclarationDict.accda"
+        app-config: "deployment/AddIn-Config.json"
         run-accunit-tests: true
       timeout-minutes: 10
       
