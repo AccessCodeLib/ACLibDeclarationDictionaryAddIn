@@ -1,0 +1,62 @@
+﻿{
+  "Info": {
+    "Class": "clsDbForm",
+    "Description": "DeclarationDictApiDialog Conditional Formatting"
+  },
+  "Items": {
+    "ConditionalFormatting": {
+      "txtWord": {
+        "Rules": [
+          {
+            "Type": "Expression",
+            "Enabled": true,
+            "FontBold": false,
+            "FontItalic": false,
+            "FontUnderline": false,
+            "ForeColor": "RGB(191,191,191)",
+            "BackColor": "RGB(255,255,255)",
+            "Expression1": "[txtWord] Is Null"
+          }
+        ]
+      },
+      "txtCurrentLetterCase": {
+        "Rules": [
+          {
+            "Type": "Expression",
+            "Enabled": true,
+            "FontBold": false,
+            "FontItalic": false,
+            "FontUnderline": false,
+            "ForeColor": "RGB(191,191,191)",
+            "BackColor": "RGB(255,255,255)",
+            "Expression1": "[txtWord] Is Null"
+          },
+          {
+            "Type": "Expression",
+            "Enabled": true,
+            "FontBold": true,
+            "FontItalic": false,
+            "FontUnderline": false,
+            "ForeColor": "RGB(186,20,25)",
+            "BackColor": "RGB(255,255,255)",
+            "Expression1": "StrComp([txtWord],[txtCurrentValue],0)<>0"
+          }
+        ]
+      },
+      "txtSelectedLetterCase": {
+        "Rules": [
+          {
+            "Type": "Expression",
+            "Enabled": true,
+            "FontBold": false,
+            "FontItalic": false,
+            "FontUnderline": false,
+            "ForeColor": "RGB(191,191,191)",
+            "BackColor": "RGB(255,255,255)",
+            "Expression1": "[txtWord] Is Null"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -21,10 +21,10 @@ Begin Form
     Width =9072
     DatasheetFontHeight =11
     ItemSuffix =4
-    Left =7620
-    Top =3045
-    Right =20775
-    Bottom =14775
+    Left =1000
+    Top =1000
+    Right =50000
+    Bottom =50000
     RecSrcDt = Begin
         0x9487851a5859e640
     End
@@ -105,8 +105,6 @@ Begin Form
                     HorizontalAnchor =2
                     VerticalAnchor =2
 
-                    LayoutCachedWidth =9072
-                    LayoutCachedHeight =6804
                 End
             End
         End

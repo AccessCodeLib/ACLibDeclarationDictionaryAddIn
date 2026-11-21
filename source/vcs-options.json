@@ -7,7 +7,7 @@
     "ExportFolder": "\\source",
     "UseFastSave": true,
     "SplitLayoutFromVBA": true,
-    "ExportFormatVersion": "4.1.2",
+    "ExportFormatVersion": "5.1.0",
     "RunBeforeExport": "",
     "RunAfterExport": "",
     "SanitizeLevel": 2,
