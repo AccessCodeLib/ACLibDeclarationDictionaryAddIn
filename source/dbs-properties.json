@@ -156,10 +156,6 @@
       "Value": true,
       "Type": 1
     },
-    "StartUpForm": {
-      "Value": "InstallAddInForm",
-      "Type": 10
-    },
     "StartUpShowDBWindow": {
       "Value": true,
       "Type": 1
