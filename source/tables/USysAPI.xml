@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <dataroot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <USysAPI>
-    <ProcName>RunVcsCheck([OpenDialogToFixLettercase], [DeclDictFilePath]) As Variant</ProcName>
+    <ProcName>RunVcsCheck([OpenDialogToFixLettercase], [DeclDictFilePath], [IncludeUsedMembers]) As Variant</ProcName>
     <Description>&lt;div&gt;&lt;font size=2&gt;Compare lettercase from CurrentVbProject with saved (table/file) dictionary items&lt;/font&gt;&lt;/div&gt;
 
 &lt;div&gt;&lt;font size=2&gt;&amp;nbsp;&lt;/font&gt;&lt;/div&gt;
@@ -12,6 +12,7 @@
 
 &lt;div&gt;&lt;font size=2&gt;OpenDialogToFixLettercase - (Boolean) - Open dialog to fix lettercase&lt;/font&gt;&lt;/div&gt;
 &lt;div&gt;&lt;font size=2&gt;DeclDictFilePath - (String) - use alternative dictionary file path&lt;/font&gt;&lt;/div&gt;
+&lt;div&gt;&lt;font size=2&gt;IncludeUsedMembers - (Boolean) - also add used members to the dictionary (default: False)&lt;/font&gt;&lt;/div&gt;
 
 &lt;/blockquote&gt;
 
@@ -50,7 +51,7 @@
   </USysAPI>
   <USysAPI>
     <ProcName>RunVcsCheckDialog()</ProcName>
-    <Description>&lt;div&gt;Equal to &lt;b&gt;RunVcsCheck(True)&lt;/b&gt;&lt;/div&gt;</Description>
+    <Description>&lt;div&gt;Equal to &lt;b&gt;RunVcsCheck(True, , True)&lt;/b&gt;&lt;/div&gt;</Description>
     <OrderPos>3</OrderPos>
   </USysAPI>
 </dataroot>
