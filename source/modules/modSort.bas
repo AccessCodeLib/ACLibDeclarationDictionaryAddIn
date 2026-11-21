@@ -1,5 +1,5 @@
 ﻿Attribute VB_Name = "modSort"
-Option Compare Database
+Option Compare Text
 Option Explicit
 
 Public Sub QuickSort(ByRef ArrToSort As Variant, ByVal FirstIndex As Long, ByVal LastIndex As Long)

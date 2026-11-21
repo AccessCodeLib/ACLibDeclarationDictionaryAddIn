@@ -30,11 +30,11 @@ End Function
 ' Function: RunVcsCheckDialog
 '---------------------------------------------------------------------------------------
 '
-'  Equal to RunVcsCheck(True)
+'  Equal to RunVcsCheck(True, vbNullString, True)
 '
 '---------------------------------------------------------------------------------------
 Public Function RunVcsCheckDialog() As Variant
-   RunVcsCheckDialog = RunVcsCheck(True)
+   RunVcsCheckDialog = RunVcsCheck(True, , True)
 End Function
 
 
@@ -46,6 +46,8 @@ End Function
 '
 ' Parameters:
 '     OpenDialogToFixLettercase - (Boolean) - Open dialog to fix lettercase
+'     DeclDictFilePath          - (String)  - Use alternative dictionary file path
+'     IncludeUsedMembers        - (Boolean) - Also add used members to the dictionary (default: False)
 '
 ' Returns:
 '      Boolean (True) ... if DiffCount = 0
@@ -54,7 +56,8 @@ End Function
 '
 '---------------------------------------------------------------------------------------
 Public Function RunVcsCheck(Optional ByVal OpenDialogToFixLettercase As Boolean = False, _
-                            Optional ByVal DeclDictFilePath As String = vbNullString) As Variant
+                            Optional ByVal DeclDictFilePath As String = vbNullString, _
+                            Optional ByVal IncludeUsedMembers As Boolean = False) As Variant
 
     Dim CheckMsg As String
     Dim DiffCnt As Long
@@ -62,52 +65,60 @@ Public Function RunVcsCheck(Optional ByVal OpenDialogToFixLettercase As Boolean 
     Dim StoreDictData As Boolean
     Dim IntialCnt As Long
 
-    With New DeclarationDict
+    Dim DeclDict As DeclarationDict
+    Set DeclDict = New DeclarationDict
 
-        If Len(DeclDictFilePath) = 0 Then
-            DeclDictFilePath = CurrentProject.Path & "\" & CurrentProject.Name & ".DeclarationDict.txt"
+    If Len(DeclDictFilePath) = 0 Then
+        DeclDictFilePath = CurrentProject.Path & "\" & CurrentProject.Name & ".DeclarationDict.txt"
+    End If
+
+    If Not DeclDict.LoadFromFile(DeclDictFilePath) Then
+       ImportVBProject CurrentVbProject, DeclDict, IncludeUsedMembers
+       ' ... log info: first export
+       DeclDict.ExportToFile DeclDictFilePath
+       RunVcsCheck = "Info: No dictionary data found. A new dictionary has been created."
+       Exit Function
+    End If
+
+    IntialCnt = DeclDict.Count
+    ImportVBProject CurrentVbProject, DeclDict, IncludeUsedMembers
+
+    DiffCnt = DeclDict.DiffCount
+    If DiffCnt = 0 Then
+        If DeclDict.Count <> IntialCnt Then
+            StoreDictData = True
         End If
+    End If
 
-        If Not .LoadFromFile(DeclDictFilePath) Then
-           .ImportVBProject CurrentVbProject
-           ' ... log info: first export
-           .ExportToFile DeclDictFilePath
-           RunVcsCheck = "Info: No dictionary data found. A new dictionary has been created."
-           Exit Function
-        End If
-
-        IntialCnt = .Count
-        .ImportVBProject CurrentVbProject
-
-        DiffCnt = .DiffCount
-        If DiffCnt = 0 Then
-            If .Count <> IntialCnt Then
+    If OpenDialogToFixLettercase Then
+        If DiffCnt > 0 Then
+            SetDeclarationDictTransferReference DeclDict
+            DoCmd.OpenForm "DeclarationDictApiDialog", , , , , acDialog
+            DiffCnt = DeclDict.DiffCount
+            If DiffCnt = 0 Then
                 StoreDictData = True
             End If
         End If
+    End If
 
-        If OpenDialogToFixLettercase Then
-            If DiffCnt > 0 Then
-                SetDeclarationDictTransferReference .Self
-                DoCmd.OpenForm "DeclarationDictApiDialog", , , , , acDialog
-                DiffCnt = .DiffCount
-                If DiffCnt = 0 Then
-                    StoreDictData = True
-                End If
-            End If
-        End If
+    If StoreDictData Then
+        DeclDict.ExportToFile DeclDictFilePath
+    End If
 
-        If StoreDictData Then
-            .ExportToFile DeclDictFilePath
-        End If
-
-        If DiffCnt > 0 Then
-            CheckMsg = .DiffCount & " word" & IIf(.DiffCount > 1, "s", vbNullString) & " with different letter case"
-            RunVcsCheck = "Failed: " & CheckMsg
-        Else
-            RunVcsCheck = True
-        End If
-
-   End With
+    If DiffCnt > 0 Then
+        CheckMsg = DeclDict.DiffCount & " word" & IIf(DeclDict.DiffCount > 1, "s", vbNullString) & " with different letter case"
+        RunVcsCheck = "Failed: " & CheckMsg
+    Else
+        RunVcsCheck = True
+    End If
 
 End Function
+
+Private Sub ImportVBProject(ByVal VbProjectToImport As VBIDE.VBProject, ByVal DeclDict As DeclarationDict, _
+                   Optional ByVal IncludeUsedMembers As Boolean = False)
+
+   With New CodemoduleDeclarationReader
+      .ImportVBProject VbProjectToImport, DeclDict, IncludeUsedMembers
+   End With
+
+End Sub

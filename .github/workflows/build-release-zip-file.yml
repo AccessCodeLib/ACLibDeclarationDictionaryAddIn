@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - name: "Checkout code for release tag"
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         ref: ${{ github.event.release.tag_name }}
 
@@ -26,6 +26,7 @@ jobs:
         source-dir: "source"
         target-dir: "bin"
         file-name: "ACLibDeclarationDict.accda"
+        app-config: "deployment/AddIn-Config.json"
         run-accunit-tests: true
       timeout-minutes: 10
       
@@ -46,7 +47,7 @@ jobs:
         echo "ZIP_NAME=$zipName" | Out-File -FilePath $env:GITHUB_ENV -Append
 
     - name: "Upload ZIP to GitHub Release"
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v3
       with:
         files: ${{ env.ZIP_NAME }}
       env:
@@ -63,7 +64,7 @@ jobs:
         echo "digest=$digest" >> $env:GITHUB_OUTPUT
 
     - name: "Attestation"
-      uses: actions/attest-build-provenance@v2
+      uses: actions/attest-build-provenance@v4
       id: attestation
       with:
         subject-name: "${{ env.ZIP_NAME }}"

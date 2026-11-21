@@ -24,7 +24,7 @@ jobs:
 
     steps:
     - name: "Checkout code for release tag"
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         ref: ${{ github.event.release.tag_name }}
 
@@ -58,14 +58,14 @@ jobs:
       timeout-minutes: 10
 
     - name: "Upload Build Artifact"
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       id: "upload"
       with:
         name: "Install files"
         path: "./bin/*"
         if-no-files-found: warn
     - name: "Attestation"
-      uses: actions/attest-build-provenance@v2
+      uses: actions/attest-build-provenance@v4
       with:
         subject-name: "Install files"
         subject-digest: sha256:${{ steps.upload.outputs.artifact-digest }}

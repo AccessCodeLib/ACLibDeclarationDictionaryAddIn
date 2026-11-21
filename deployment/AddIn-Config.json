@@ -1,0 +1,9 @@
+{
+    "DatabaseProperties": [
+        {
+            "Name": "StartUpForm",
+            "Type": 10,
+            "Value": "InstallAddInForm"
+        }
+    ]
+}
