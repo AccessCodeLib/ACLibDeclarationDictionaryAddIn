@@ -11,6 +11,17 @@ The idea was born from a discussion ([msaccess-vcs-add-in: issue 599](https://gi
 
 Core components: https://github.com/AccessCodeLib/ACLibDeclarationDictionaryCore
 
+## Branches
+
+| Branch | Purpose |
+|---|---|
+| `main` | Release line of this add-in |
+| `add-in-dev` | Development of the add-in |
+| `core` | Mirror of the `main` branch of ACLibDeclarationDictionaryCore |
+
+Core changes are developed in the Core repository and taken over 1:1 into this repository; add-in specific code is added on top.
+Core updates are merged, not rebased: `core` is updated from Core `main`, then merged into `add-in-dev` (preferably via a `feature/core-<version>` branch and a pull request).
+
 ## API
 
 ### RunVcsCheck([OpenDialogToFixLettercase], [DeclDictFilePath], [IncludeUsedMembers]) As Variant
