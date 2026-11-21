@@ -203,7 +203,7 @@ Private Sub RefreshDiffData()
     Else
         With Me.lbDictData
             Set .Recordset = m_WordListRecordset
-            .Value = Me.lbDictData.Column(0, 0)
+            .Value = .Column(0, Abs(.ColumnHeads))
         End With
         FillWordVariationsList
     End If
