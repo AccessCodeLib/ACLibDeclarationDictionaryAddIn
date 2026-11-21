@@ -191,7 +191,7 @@ Public Function ToDict(Optional ByVal ShowAll As Boolean = False) As Scripting.D
       Set IdxVariationsDict = m_WordVariations.Item(IdxWordKey)
 
       If Not ShowAll Then
-         OutputWord = IsChangedItem(IdxWordKey, VariationsDict)
+         OutputWord = IsChangedItem(IdxWordKey, IdxVariationsDict)
       End If
       If OutputWord Then
          If IdxVariationsDict.Count > 1 Then
