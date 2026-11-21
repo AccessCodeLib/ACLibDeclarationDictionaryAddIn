@@ -35,6 +35,8 @@ End Function
 '
 ' Parameters:
 '     OpenDialogToFixLettercase - (Boolean) - Open dialog to fix lettercase
+'     DeclDictFilePath          - (String)  - Use alternative dictionary file path
+'     IncludeUsedMembers        - (Boolean) - Also add used members to the dictionary (default: False)
 '
 ' Returns:
 '      Boolean (True) ... if DiffCount = 0

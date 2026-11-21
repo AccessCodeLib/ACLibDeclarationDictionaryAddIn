@@ -9,12 +9,13 @@ The complete Access menu add-in is [ACLibDeclarationDictionaryAddIn](https://git
 
 ## API
 
-### RunVcsCheck([OpenDialogToFixLettercase], [DeclDictFilePath]) As Variant
+### RunVcsCheck([OpenDialogToFixLettercase], [DeclDictFilePath], [IncludeUsedMembers]) As Variant
 Compare lettercase from CurrentVbProject with saved file dictionary items
  
 #### Parameters
 - OpenDialogToFixLettercase - (Boolean) - Open dialog to fix lettercase
 - DeclDictFilePath - (String) - use alternative dictionary file path
+- IncludeUsedMembers - (Boolean) - also add used members to the dictionary (default: False)
 
 #### Returns
 - Boolean (True) ... if DiffCount = 0
@@ -33,4 +34,4 @@ End If
 ```
 
 ### RunVcsCheckDialog()
-Equal to RunVcsCheck(True)
+Equal to RunVcsCheck(True, , True)
