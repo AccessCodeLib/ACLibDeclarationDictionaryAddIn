@@ -256,3 +256,20 @@ Public Sub ToString_AddWords_OutputVariations()
    Assert.That Actual, Iz.EqualTo("Test:Test|test")
 
 End Sub
+
+Public Sub ToDict_OneChangedWord_ReturnsOnlyChangedWord()
+
+   m_DeclDict.AddWord "Test"
+   m_DeclDict.AddWord "test"
+   m_DeclDict.AddWord "xyz"
+   m_DeclDict.AddWord "abc"
+
+   Dim Actual As Scripting.Dictionary
+   Set Actual = m_DeclDict.ToDict(False)
+
+   Assert.That Actual.Count, Iz.EqualTo(1), "Count of changed words"
+   Assert.IsTrue Actual.Exists("Test"), "Test is listed"
+
+   Assert.That m_DeclDict.ToDict(True).Count, Iz.EqualTo(3), "Count with ShowAll"
+
+End Sub
