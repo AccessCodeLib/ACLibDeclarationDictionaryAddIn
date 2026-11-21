@@ -1,4 +1,0 @@
-﻿Subkey	Type	ValName	Value
-HKEY_CURRENT_ACCESS_PROFILE\\Menu Add-Ins\\ACLib Declaration Dictionary	0		
-HKEY_CURRENT_ACCESS_PROFILE\\Menu Add-Ins\\ACLib Declaration Dictionary	1	Expression	=StartAddIn()
-HKEY_CURRENT_ACCESS_PROFILE\\Menu Add-Ins\\ACLib Declaration Dictionary	1	Library	|ACCDIR\\ACLibDeclarationDict.accda

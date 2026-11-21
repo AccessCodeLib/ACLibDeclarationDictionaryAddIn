@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<dataroot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <USysRegInfo>
+    <Subkey>HKEY_CURRENT_ACCESS_PROFILE\Menu Add-Ins\ACLib Declaration Dictionary</Subkey>
+    <Type>0</Type>
+  </USysRegInfo>
+  <USysRegInfo>
+    <Subkey>HKEY_CURRENT_ACCESS_PROFILE\Menu Add-Ins\ACLib Declaration Dictionary</Subkey>
+    <Type>1</Type>
+    <ValName>Expression</ValName>
+    <Value>=StartAddIn()</Value>
+  </USysRegInfo>
+  <USysRegInfo>
+    <Subkey>HKEY_CURRENT_ACCESS_PROFILE\Menu Add-Ins\ACLib Declaration Dictionary</Subkey>
+    <Type>1</Type>
+    <ValName>Library</ValName>
+    <Value>|ACCDIR\ACLibDeclarationDict.accda</Value>
+  </USysRegInfo>
+</dataroot>
