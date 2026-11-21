@@ -80,7 +80,7 @@ jobs:
         $ErrorActionPreference = "Stop"
 
         # get current release notes
-        $oldBody = gh release view $env:TAG --repo $env:REPO --json body --template "{{.body}}"
+        $oldBody = (gh release view $env:TAG --repo $env:REPO --json body --template "{{.body}}") -join "`n"
 
         # build Attestation URL
         $attestationId = "${{ steps.attestation.outputs.attestation-id }}"
