@@ -159,10 +159,10 @@ Public Function ToString(Optional ByVal ShowAll As Boolean = False) As String
    For WordIndex = 0 To m_Words.Count - 1
 
       IdxWordKey = m_Words.Keys(WordIndex)
-      Set IdxVariationsDict = m_Words.Item(IdxWordKey)
+      Set IdxVariationsDict = m_WordVariations.Item(IdxWordKey)
 
       If IdxVariationsDict.Count > (1 - Abs(ShowAll)) Then
-         OutputString = OutputString & vbNewLine & IdxWordKey & ":" & GetWordVariationsOutputString(IdxWordKey)
+         OutputString = OutputString & vbNewLine & IdxWordKey & ":" & GetWordVariationsOutputString(IdxWordKey, False)
       End If
 
    Next
@@ -221,13 +221,21 @@ Public Function GetWordVariations(ByVal Word As String, Optional ByVal IgnoreOri
    Dim AppendVariant As Boolean
    Dim i As Long, k As Long
    Dim WordVariationsDict As Scripting.Dictionary
+   Dim ResultCount As Long
 
    If StrComp(Word, m_Words.Item(Word), vbBinaryCompare) <> 0 Then
       Word = m_Words.Item(Word)
    End If
 
    Set WordVariationsDict = m_WordVariations.Item(Word)
-   ReDim Variations(WordVariationsDict.Count - 1 - Abs(IgnoreOriginalWord))
+
+   ResultCount = WordVariationsDict.Count - Abs(IgnoreOriginalWord)
+   If ResultCount < 1 Then
+      GetWordVariations = Split(vbNullString)   ' leeres String-Array
+      Exit Function
+   End If
+
+   ReDim Variations(ResultCount - 1)
 
    AppendVariant = Not IgnoreOriginalWord
 
